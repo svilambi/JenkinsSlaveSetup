@@ -13,7 +13,7 @@ create the nodes on the master node.
 
 get the required files from the master node in the slave node.
 
-http://jenkins-master:port/jnlpJars/slave.jar
+http://jenkins-master:port/jnlpJars/slave.jar  --> update the jenkins-master and port number with master jenkins machine-name or ip and port number which jenkins is running on
 
 http://jenkins-master:port/computer/node-name/slave-agent.jnlp  --> update node-name with machine name
 
