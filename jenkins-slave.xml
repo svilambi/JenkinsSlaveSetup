@@ -1,0 +1,35 @@
+
+<service>
+  <id>jenkinsslave</id>
+  <name>Jenkins agent</name>
+  <description>This service runs an agent for Jenkins automation server.</description>
+  <!--
+    if you'd like to run Jenkins with a specific version of Java, specify a full path to java.exe.
+    The following value assumes that you have java in your PATH.
+  -->
+  <executable>%Java_Home%\bin\java.exe</executable>
+  <arguments>-Xrs  -jar "%BASE%\slave.jar" -jnlpUrl http://<jenkins-master>:<port>/computer/<node-name>/slave-agent.jnlp -secret <secret> </arguments>
+  <logmode>rotate</logmode>
+
+  <onfailure action="restart" />
+  
+  <!--
+    If uncommented, download the Remoting version provided by the Jenkins master.
+    Enabling for HTTP implies security risks (e.g. replacement of JAR via DNS poisoning). Use on your own risk.
+    NOTE: This option may fail to work correctly (e.g. if Jenkins is located behind HTTPS with untrusted certificate).
+    In such case the old agent version will be used; you can replace slave.jar manually or to specify another download URL.
+  -->
+  <!-- <download from="http://jenkins-master:port/jnlpJars/slave.jar" to="%BASE%\slave.jar"/> -->
+
+  <extensions>
+    <!-- This is a sample configuration for the RunawayProcessKiller extension. -->
+    <extension enabled="true" 
+               className="winsw.Plugins.RunawayProcessKiller.RunawayProcessKillerExtension"
+               id="killOnStartup">
+      <pidfile>%BASE%\jenkins_agent.pid</pidfile>
+      <stopTimeout>5000</stopTimeout>
+      <stopParentFirst>false</stopParentFirst>
+    </extension>
+  </extensions>
+  
+</service>
