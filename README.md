@@ -37,3 +37,4 @@ References
 
 code for jenkins-slave.exe available at https://github.com/winsw/winsw
 
+https://stackoverflow.com/questions/24255439/how-to-setup-jenkins-slave-to-run-as-a-windows-service-using-command-line/45153740
